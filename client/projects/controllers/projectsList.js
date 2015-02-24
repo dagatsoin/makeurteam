@@ -1,7 +1,7 @@
 angular.module("makeurteam").controller("ProjectsListCtrl", ['$scope', '$meteor',
   function($scope, $meteor){
 
-    $scope.projects = $meteor.collection(Projects);
+    $scope.projects = $meteor.collection(Projects).subscribe('projects');
 
     $scope.remove = function(project){
       $scope.projects.splice( $scope.projects.indexOf(project), 1 );
