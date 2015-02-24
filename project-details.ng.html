@@ -1,0 +1,34 @@
+ <div ng-controller="ProjectDetailsCtrl">
+	<input ng-model="project.title" class="title" type="text" name="text" placeholder="Project title" />
+	<input ng-model="project.subtitle" class="subtitle" type="text" name="text" placeholder="Short description " />
+	<input ng-model="project.teaserText" class ="teaserText" type="text" name="text" placeholder="Twitter pitch" /> 
+	<input ng-model="project.description" class="description" type="text" name="text" placeholder="1000 cars pitch"  />
+	<input ng-model="project.teaserImg" class="teaserImg" type="text" name="text" placeholder="Tesear image" /> 
+	<input ng-model="project.membersCountGoal" class="membersCountGoal" type="text" name="text" placeholder="Team  count goal" />
+	<input ng-model="project.membersCount" class="membersCount" type="text" name="text" placeholder="Actual team count" /> 
+	<input ng-model="project.lookingFor" class="lookingFor" type="text" name="text" placeholder="Free slot for" /> 
+	
+	<label>Public</label>
+	<input type="checkbox" ng-model="project.public">
+	<label>Published</label>
+	<input type="checkbox" ng-model="project.published">
+	<button ng-click="save()">Save</button>
+	<button ng-click="reset()">Reset form</button>
+	<button><a href="/projects">Cancel</a></button>
+{{project.title}}
+	<ul>
+		Users:
+		<li ng-repeat="user in users">
+			<div>{{ user.emails[0].address }}</div>
+		</li>
+	</ul>
+	<!--div class="project-details-maps">
+      <div class="angular-google-map-container">
+        <ui-gmap-google-map center="map.center" events="map.events" zoom="map.zoom">
+	    	<ui-gmap-marker coords="project.location" options="map.marker.options" events="map.marker.events" idkey="project._id">
+	    	</ui-gmap-marker>
+	  	</ui-gmap-google-map>
+      </div>
+    </div-->
+
+</div>
