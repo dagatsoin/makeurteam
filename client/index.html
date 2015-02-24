@@ -1,12 +1,28 @@
 <head>
-  <base href="/">
+ 	<base href="/">
 </head>
 <body>
-
-  <div ng-app="makeurteam">
-    <h1>
-      <a href="/projects">Home</a>
-    </h1>
-    <div ui-view></div>
-  </div>
- </body>
+	<header class="tm-header">
+		<div class="container">      
+			<h1>Looking for great startup adventure to get in? No money, just (awesome) talent needed. </h1>
+		</div>
+	</header>
+ 	<div ng-app="makeurteam">
+ 		<meteor-include src="loginButtons"></meteor-include>
+		<h1>
+		  <a href="/projects">Home</a>
+		</h1>
+		<div ui-view></div>
+ 	</div>
+	<div class="tm-bottom">
+		<div class="container">
+			<h4>Pourquoi j'irai dévoiler mon idée ??? On va me la piquer *regards nerveux affolés*</h4>
+			<ul>
+				<li>Parcequ'une idée ne vaut rien, c'est l'éxécution qui compte.</li>
+				<li>Parceque au bout d'un moment si tu veux pécho un(e) associé(e) faut montrer ce que tu as</li>
+				<li>C'est comme dans un raid, y'a besoin d'un leader qui sait expliquer clairement et simplement sa stratégie.</li>
+				<li>La meilleur façon de protéger un projet c'est de le rendre tellement awesome que les copies resteront toujours des copies.</li>
+			</ul>
+		</div>
+	</div>
+</body>
