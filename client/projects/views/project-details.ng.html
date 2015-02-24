@@ -1,4 +1,3 @@
- <div ng-controller="ProjectDetailsCtrl">
 	<input ng-model="project.title" class="title" type="text" name="text" placeholder="Project title" />
 	<input ng-model="project.subtitle" class="subtitle" type="text" name="text" placeholder="Short description " />
 	<input ng-model="project.teaserText" class ="teaserText" type="text" name="text" placeholder="Twitter pitch" /> 
@@ -15,11 +14,11 @@
 	<button ng-click="save()">Save</button>
 	<button ng-click="reset()">Reset form</button>
 	<button><a href="/projects">Cancel</a></button>
-{{project.title}}
+
 	<ul>
 		Users:
-		<li ng-repeat="user in users">
-			<div>{{ user.emails[0].address }}</div>
+		<li ng-repeat="user in users | uninvited:project">
+		    <div>{{ user | displayName }}</div>
 		</li>
 	</ul>
 	<!--div class="project-details-maps">
@@ -30,5 +29,3 @@
 	  	</ui-gmap-google-map>
       </div>
     </div-->
-
-</div>

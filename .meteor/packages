@@ -9,3 +9,5 @@ urigo:angular
 angularui:angular-ui-router
 accounts-password
 accounts-ui
+urigo:angular-utils-pagination
+tmeasday:publish-counts

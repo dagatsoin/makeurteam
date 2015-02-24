@@ -1,5 +1,9 @@
-Meteor.publish("projects", function () {
-  return Projects.find({
+Meteor.publish("projects", function (options, searchString) {
+  if (searchString == null)
+    searchString = ''; 
+
+  Counts.publish(this, 'numberOfProjects', Projects.find({
+    'title' : { '$regex' : '.*' + searchString || '' + '.*', '$options' : 'i' },
     $or:[
       {$and:[
         {"public": true},
@@ -9,5 +13,17 @@ Meteor.publish("projects", function () {
         {owner: this.userId},
         {owner: {$exists: true}}
       ]}
-    ]});
+  ]}), { noReady: true });
+  return Projects.find({
+    'title' : { '$regex' : '.*' + searchString || '' + '.*', '$options' : 'i' },    
+    $or:[
+      {$and:[
+        {"public": true},
+        {"public": {$exists: true}}
+      ]},
+      {$and:[
+        {owner: this.userId},
+        {owner: {$exists: true}}
+      ]}
+    ]}, options);
 });

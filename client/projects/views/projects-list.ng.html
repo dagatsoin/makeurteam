@@ -1,4 +1,3 @@
-<div ng-controller="ProjectsListCtrl">
 	<form id="new-project">
 		<label>Public</label>
 		<input type="checkbox" ng-model="newProject.public">
@@ -16,7 +15,7 @@
 	</form>
 	<div>
 	  <input type="search" ng-model="search" placeholder="Search">
-		<article ng-repeat="project in projects">
+		<article dir-paginate="project in projects | itemsPerPage: perPage" total-items="projectsCount.count">
 			<button ng-click="remove(project);">Remove</button> 
 			<h3><a href="/projects/{{project._id}}">{{project.title}}</a></h3>
 			<p>{{project.subtitle}}</p>
@@ -24,6 +23,7 @@
 			<p>{{project.teaserText}}</p>
 			<h4>Looking for :</h4>
 			<p>{{project.lookingFor}}</p>
+			<p><small>Posted by {{ creator(project) | displayName }}</small></p>
 		</article>
+		<dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
 	</div>
-</div>
