@@ -11,3 +11,9 @@ accounts-password
 accounts-ui
 urigo:angular-utils-pagination
 tmeasday:publish-counts
+email
+angularui:angular-google-maps
+netanelgilad:angular-file-upload
+cfs:standard-packages
+cfs:filesystem
+cfs:ui

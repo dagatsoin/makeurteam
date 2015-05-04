@@ -6,8 +6,8 @@ Meteor.publish("projects", function (options, searchString) {
     'title' : { '$regex' : '.*' + searchString || '' + '.*', '$options' : 'i' },
     $or:[
       {$and:[
-        {"public": true},
-        {"public": {$exists: true}}
+        {"published": true},
+        {"published": {$exists: true}}
       ]},
       {$and:[
         {owner: this.userId},
@@ -18,8 +18,8 @@ Meteor.publish("projects", function (options, searchString) {
     'title' : { '$regex' : '.*' + searchString || '' + '.*', '$options' : 'i' },    
     $or:[
       {$and:[
-        {"public": true},
-        {"public": {$exists: true}}
+        {"published": true},
+        {"published": {$exists: true}}
       ]},
       {$and:[
         {owner: this.userId},

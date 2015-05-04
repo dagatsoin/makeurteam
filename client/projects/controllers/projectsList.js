@@ -1,5 +1,5 @@
-angular.module("makeurteam").controller("ProjectsListCtrl", ['$scope', '$meteor', '$rootScope',
-  function($scope, $meteor, $rootScope){
+angular.module("makeurteam").controller("ProjectsListCtrl", ['$scope', '$meteor', '$rootScope', '$state',
+  function($scope, $meteor, $rootScope, $state){
 
 	$scope.page = 1;
 	$scope.perPage = 3;
@@ -12,19 +12,38 @@ angular.module("makeurteam").controller("ProjectsListCtrl", ['$scope', '$meteor'
   		});
     });
 
-    $meteor.autorun($scope, function() {
+	$meteor.autorun($scope, function() {
 	    $meteor.subscribe('projects', {
-				limit: parseInt($scope.getReactively('perPage')),
-				skip: (parseInt($scope.getReactively('page')) - 1) * parseInt($scope.getReactively('perPage')),
-				sort: $scope.getReactively('sort')
-			}, $scope.getReactively('search')).then(function(){
-				$scope.projectsCount = $meteor.object(Counts ,'numberOfProjects', false);
+			limit: parseInt($scope.getReactively('perPage')),
+			skip: (parseInt($scope.getReactively('page')) - 1) * parseInt($scope.getReactively('perPage')),
+			sort: $scope.getReactively('sort')
+		},
+		$scope.getReactively('search')).then(function(){
+			$scope.projectsCount = $meteor.object(Counts ,'numberOfProjects', false);
+			$scope.projects.forEach( function (project) {
+				project.onClicked = function () {
+					onMarkerClicked(project);
+				};
 			});
-		});
 
-		$scope.pageChanged = function(newPage) {
-		  $scope.page = newPage;
-		};
+			$scope.map = {
+				center: {
+					latitude: 46.724104,
+					longitude:  2.117618
+				},
+				zoom: 1
+			};
+
+			var onMarkerClicked = function(marker){
+				$state.go('projectDetails', {projectId: marker._id});
+			}
+
+		});
+	});
+
+	$scope.pageChanged = function(newPage) {
+	  $scope.page = newPage;
+	};
 
     $scope.remove = function(project){
       $scope.projects.splice( $scope.projects.indexOf(project), 1 );
@@ -32,7 +51,7 @@ angular.module("makeurteam").controller("ProjectsListCtrl", ['$scope', '$meteor'
 
     $scope.$watch('orderProperty', function(){
       if ($scope.orderProperty)
-        $scope.sort = {name: parseInt($scope.orderProperty)};
+        $scope.sort = {title: parseInt($scope.orderProperty)};
     });
 
     $meteor.subscribe('users');
@@ -55,6 +74,5 @@ angular.module("makeurteam").controller("ProjectsListCtrl", ['$scope', '$meteor'
 					return "me";
 
 		return owner;
-	}
-
+	};
 }]);
